@@ -1,0 +1,30 @@
+<!doctype html>
+<html>
+<head>
+  <meta charset="utf-8">
+  <title>Matches for {{job.title}}</title>
+  <link rel="stylesheet" href="/static/style.css">
+</head>
+<body>
+  <div class="container">
+    <h1>Matches — {{job.title}}</h1>
+    <a href="/">← Back</a>
+    <div class="matches">
+      {% if matches %}
+        <table>
+          <tr><th>Candidate</th><th>Fit Score</th><th>Snippet</th></tr>
+          {% for m in matches %}
+            <tr>
+              <td>{{m.name}} <br><small>{{m.id}}</small></td>
+              <td>{{m.fit_score}}</td>
+              <td><pre>{{m.snippet}}</pre></td>
+            </tr>
+          {% endfor %}
+        </table>
+      {% else %}
+        <p>No candidates to match.</p>
+      {% endif %}
+    </div>
+  </div>
+</body>
+</html>

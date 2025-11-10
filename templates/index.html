@@ -1,0 +1,54 @@
+<!doctype html>
+<html>
+<head>
+  <meta charset="utf-8">
+  <title>HireSense AI - Prototype</title>
+  <link rel="stylesheet" href="/static/style.css">
+</head>
+<body>
+  <div class="container">
+    <h1>HireSense AI — Prototype</h1>
+    <div class="box">
+      <h2>Upload Candidate Resume</h2>
+      <form action="/upload_resume" method="post" enctype="multipart/form-data">
+        <input type="text" name="name" placeholder="Candidate name" required>
+        <input type="file" name="resume" accept=".pdf,.txt" required>
+        <button type="submit">Upload</button>
+      </form>
+    </div>
+
+    <div class="box">
+      <h2>Add Job</h2>
+      <form action="/add_job" method="post">
+        <input type="text" name="title" placeholder="Job title" required>
+        <textarea name="description" placeholder="Job description (skills, responsibilities)" required></textarea>
+        <button type="submit">Add Job</button>
+      </form>
+    </div>
+
+    <div class="box">
+      <h2>Saved Candidates</h2>
+      <ul>
+        {% for c in candidates %}
+          <li>{{c.name}} — <small>{{c.id}}</small></li>
+        {% else %}
+          <li><em>No candidates yet</em></li>
+        {% endfor %}
+      </ul>
+    </div>
+
+    <div class="box">
+      <h2>Saved Jobs</h2>
+      <ul>
+        {% for j in jobs %}
+          <li>{{j.title}} — <a href="/match/{{j.id}}">View Matches</a></li>
+        {% else %}
+          <li><em>No jobs yet</em></li>
+        {% endfor %}
+      </ul>
+    </div>
+
+    <p class="note">Tip: Upload a plain text file as resume if PDF text extraction gives empty results.</p>
+  </div>
+</body>
+</html>
